@@ -36,6 +36,15 @@ enum State : int32 {
 	Off = 0, On = 1, Bypassed = 2
 };
 
+namespace cx {
+ 	const inline cx32 Zero = cx32();
+ 	const inline cx32 I = cx32(0,1);
+ 	const inline cx32 One = cx32(1);
+
+ 	cx32 purePhase(const float32 theta);
+ }
+
+
 void trace(const char *tmpl);
 void trace(const char *tmpl,const float32 value);
 void trace(const char *tmpl,const float32 value1,const float32 value2);
@@ -61,8 +70,8 @@ T clamp(const T lo,const T hi,const T value) {
  inline float32 const TwoPi = 2.f*Pi;
 
 
-inline cx32 CxZero = cx32();
-cx32 r2c(const float32 r);
+
+
 
 enum TriggerMode : uint32 {
 	MANUAL = 0,

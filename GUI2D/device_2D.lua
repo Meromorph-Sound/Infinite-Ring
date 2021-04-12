@@ -5,7 +5,7 @@ format_version = "2.0"
 front = {
   Bg = { {path = "front1U"} },
   onoffbypass = {
-      offset = {185,400},
+      offset = {185,200},
       {path="Fader_Bypass_3frames", frames = 3 },
     },
   patches = { offset = { 200,10},{ path = "PatchBrowseGroup", frames = 1}},
@@ -27,12 +27,12 @@ front = {
     { path = "Knob_01_63frames", frames = 63 }
   },
   limiterOnOff = {
-    offset = { 2000, 80 },
-    { path = "Button_53_02frames", frames = 2}
+    offset = { 2000, 30 },
+    { path = "Button_53_2frames", frames = 2}
   },
   limiterHardSoft = {
-    offset = { 2000, 30 },
-    { path = "Button_53_02frames", frames = 2}
+    offset = { 2000, 130 },
+    { path = "Button_53_2frames", frames = 2}
   },
   limiter = {
     offset = { 2300, 80 },

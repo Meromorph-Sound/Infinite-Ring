@@ -1,7 +1,5 @@
 #include "Jukebox.h"
-
-
-#include "Clicker.hpp"
+#include "Ring.hpp"
 
 void* JBox_Export_CreateNativeObject(const char iOperation[], const TJBox_Value iParams[], TJBox_UInt32 iCount) {
      if(std::strcmp(iOperation, "Instance") == 0){ //(3)

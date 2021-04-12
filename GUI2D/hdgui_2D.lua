@@ -29,9 +29,8 @@ front = jbox.panel {
       value = "/custom_properties/limiterOnOff"
      },
      jbox.toggle_button {
-      graphics = { node = "limiterOnOff" },
-      value = "/custom_properties/limiterOnOff",
-      increasing = true
+      graphics = { node = "limiterHardSoft" },
+      value = "/custom_properties/limiterHardSoft"
      },
      jbox.analog_knob {
       graphics = { node = "limiter" },

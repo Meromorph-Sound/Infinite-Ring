@@ -36,3 +36,9 @@
 .cproject
 
 .project
+
+GUI/
+
+Intermediate-llvm/
+
+*.plist

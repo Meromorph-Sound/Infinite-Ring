@@ -8,11 +8,11 @@ gui:
 
 .PHONY: build
 build:
-	PYTHONPATH=$(BUILD_TOOLS) python build45.py local45 Testing
+	PYTHONPATH=$(BUILD_TOOLS) python2 build45.py local45 Testing
 	
 .PHONY: package
 package:
-	PYTHONPATH=$(BUILD_TOOLS) python build45.py universal45
+	PYTHONPATH=$(BUILD_TOOLS) python2 build45.py universal45
 	
 
 .PHONY: all

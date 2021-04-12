@@ -11,7 +11,6 @@
 #import "base.hpp"
 
 namespace meromorph {
-namespace ring {
 
 class Limiter {
 public:
@@ -38,10 +37,9 @@ public:
 	void setActive(const bool a) { active=a; }
 
 	void limit(float32 *data,const uint32 n);
-	void limit(std::vector<float> &v) { limit(v.data(),v.size()); }
+	void limit(std::vector<float32> &v) { limit(v.data(),v.size()); }
 };
 
-} /* namespace click */
 } /* namespace meromorph */
 
 #endif /* LIMITER_HPP_ */

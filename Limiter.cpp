@@ -8,7 +8,6 @@
 #include "Limiter.hpp"
 
 namespace meromorph {
-namespace ring {
 
 void Limiter::limit(float32 *data,const uint32 n) {
 	if(!active) return;
@@ -23,5 +22,4 @@ void Limiter::limit(float32 *data,const uint32 n) {
 	}
 }
 
-} /* namespace click */
 } /* namespace meromorph */

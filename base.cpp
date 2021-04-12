@@ -62,4 +62,11 @@ void trace(const char *tmpl,const float32 value1,const float32 value2) {
 
  cx32 r2c(const float32 r) { return cx32(r,0); }
 
+ namespace cx {
+ 	cx32 purePhase(const float32 theta) { return std::polar(1.f,theta*Pi/180.f); }
+ }
+
 }
+
+
+
