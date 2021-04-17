@@ -34,15 +34,17 @@ class ChannelProcessor {
 		bool inputConnected() const;
 		bool outputConnected() const;
 
-		uint32 read(float32 *l);
-		void write(uint32 N,float32 *l);
+		uint32 read();
+		void write();
+		bool isSilent();
 
 		bool initialised = false;
 
 		cx32 phase = cx::One;
-			float32 offset = 0;
-			cx32 angle = cx::One;
-			Limiter limiter;
+		cx32 angle = cx::One;
+		Limiter limiter;
+		float32 inputGain = 1.f;
+		float32 outputGain = 1.0f;
 
 
 		std::vector<float32> buffer;
@@ -51,6 +53,7 @@ class ChannelProcessor {
 		dsp::Hilbert hilbert;
 
 		cx32 runningPhase = cx::One;
+		cx32 runningAngle = cx::One;
 
 
 	public:
@@ -65,9 +68,10 @@ class ChannelProcessor {
 		void bypass();
 		void off() {};
 
-		void setPhase(const cx32 p) { phase=p; }
-		void setAngle(const cx32 a) { angle=a; }
-		void setOffset(const float32 o) { offset=o; }
+		void setInputGain(const float32 a) { inputGain=a; }
+		void setOutputGain(const float32 a) { outputGain=a; }
+		void setPhase(const float32 p) { phase=std::polar(1.f,p); }
+		void setAngle(const float32 a) { angle=std::polar(1.f,a*0.1f); }
 		void setLimiterOnOff(const bool b) { limiter.setActive(b); }
 		void setLimiterMode(const Limiter::Mode m) { limiter.setMode(m); }
 		void setLimit(const float32 l) { limiter.setActive(l); }

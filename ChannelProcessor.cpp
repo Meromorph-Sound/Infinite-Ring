@@ -29,49 +29,60 @@ bool ChannelProcessor::outputConnected() const {
 		else return false;
 	}
 
-uint32 ChannelProcessor::read(float32 *l) {
+uint32 ChannelProcessor::read() {
 		if(!inputConnected()) return 0;
 		auto ref = JBox_LoadMOMPropertyByTag(input, IN_BUFFER);
 		auto length = std::min<int64>(JBox_GetDSPBufferInfo(ref).fSampleCount,BUFFER_SIZE);
-		if(length>0) JBox_GetDSPBufferData(ref, 0, length, l);
+		if(length>0) JBox_GetDSPBufferData(ref, 0, length, buffer.data());
+
+
+
 		return static_cast<int32>(length);
 	}
 
-void ChannelProcessor::write(uint32 N,float32 *l) {
-	if(N>0) {
+void ChannelProcessor::write() {
 		auto ref = JBox_LoadMOMPropertyByTag(output, OUT_BUFFER);
-		JBox_SetDSPBufferData(ref, 0, N, l);
-	}
+		JBox_SetDSPBufferData(ref, 0, BUFFER_SIZE, buffer.data());
+
+}
+
+bool ChannelProcessor::isSilent() {
+	for(auto it=buffer.begin();it!=buffer.end();it++) if(*it != 0.f) return false;
+	return true;
 }
 
 void ChannelProcessor::reset() {
 	hilbert.reset();
 	runningPhase=cx::One;
+	runningAngle=cx::One;
 }
 
+
+
 void ChannelProcessor::process() {
-	auto n=read(buffer.data());
-	if(n>0) {
-		for(auto i=0;i<BUFFER_SIZE;i++) cxbuffer[i]=cx32(buffer[i]);
+	auto n=read();
+	if(n>0 && ! isSilent()) {
+		for(auto i=0;i<BUFFER_SIZE;i++) cxbuffer[i]=cx32(buffer[i]*inputGain);
 		hilbert.apply(cxbuffer,cxout);
 
 		// put in the phase bit here
 
 		for(auto i=0;i<BUFFER_SIZE;i++) {
 			runningPhase *= phase;
+			runningAngle *= angle;
 			auto p = std::imag(runningPhase);
 			cx32 z = cxout[i]*p;
-			cx32 o = angle / (cx::One - z);
-			buffer[i]=std::real(o)-offset;
+			cx32 o = runningAngle / (cx::One - z);
+			buffer[i]=std::real(o)*outputGain;
 		}
 		limiter.limit(buffer);
-		write(BUFFER_SIZE,buffer.data());
+		write();
 	}
 }
 
 void ChannelProcessor::bypass() {
-	auto n=read(buffer.data());
-	if(n>0) write(BUFFER_SIZE,buffer.data());
+	auto n=read();
+	if(n>0) write();
 }
 
 

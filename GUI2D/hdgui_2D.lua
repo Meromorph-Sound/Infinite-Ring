@@ -12,17 +12,9 @@ front = jbox.panel {
       graphics = { node = "phase" },
       value = "/custom_properties/phase"
     },
-    jbox.analog_knob { 
-      graphics = { node = "offset" },
-      value = "/custom_properties/offset"
-     },
      jbox.analog_knob { 
       graphics = { node = "angle" },
       value = "/custom_properties/angle"
-     },
-     jbox.analog_knob { 
-      graphics = { node = "gain" },
-      value = "/custom_properties/gain"
      },
      jbox.toggle_button { 
       graphics = { node = "limiterOnOff" },
@@ -35,6 +27,22 @@ front = jbox.panel {
      jbox.analog_knob {
       graphics = { node = "limiter" },
       value = "/custom_properties/limiter"
+     },
+     jbox.analog_knob { 
+      graphics = { node = "inGain" },
+      value = "/custom_properties/inGain"
+     },
+     jbox.analog_knob {
+      graphics = { node = "outGain" },
+      value = "/custom_properties/outGain"
+     },
+     jbox.sequence_meter {
+       graphics = { node = "inData" },
+       value = "/custom_properties/inData"
+     },
+     jbox.sequence_meter {
+       graphics = { node = "outData" },
+       value = "/custom_properties/outData"
      }
      
   }

@@ -7,7 +7,6 @@
 		deviceVersion="1.0.0d1">
 		<Object name="custom_properties">
 			<Value property="phase" type="number">0</Value>
-			<Value property="offset" type="number">-1</Value>
 			<Value property="angle" type="number">0</Value>
 			<Value property="gain" type="number">1</Value>
 			<Value property="limiter" type="number">1</Value>

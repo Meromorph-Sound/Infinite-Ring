@@ -41,6 +41,7 @@ namespace cx {
  	const inline cx32 I = cx32(0,1);
  	const inline cx32 One = cx32(1);
 
+ 	float32 deg2rad(const float32 deg);
  	cx32 purePhase(const float32 theta);
  }
 

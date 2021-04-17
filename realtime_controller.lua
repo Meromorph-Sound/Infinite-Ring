@@ -28,12 +28,13 @@ rt_input_setup = {
   notify = {
   "/custom_properties/builtin_onoffbypass",
   "/custom_properties/phase",
-  "/custom_properties/offset",
+ 
   "/custom_properties/angle",
   "/custom_properties/limiterOnOff",
   "/custom_properties/limiterHardSoft",
   "/custom_properties/limiter",
-  "/custom_properties/gain",
+  "/custom_properties/inGain",
+   "/custom_properties/outGain",
   "/audio_inputs/Left/connected",
   "/audio_inputs/Right/connected",
   "/transport/request_reset_audio",

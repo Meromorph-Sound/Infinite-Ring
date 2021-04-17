@@ -12,23 +12,17 @@ custom_properties = jbox.property_set{
 		    property_tag = 1,
         min = 0,
 		    default = 1,
-        steps = 1801,
+        steps = 9001,
 		    ui_name = jbox.ui_text("phase"),
-		    ui_type = jbox.ui_linear ({min=0, max=180, units={{template = jbox.ui_text("degrees" )}}})
+		    ui_type = jbox.ui_linear ({min=-45, max=45, units={{decimals=2,template = jbox.ui_text("degrees" )}}})
 		  },
-		  offset = jbox.number {
-        property_tag = 2,
-        default = 1,
-        ui_name = jbox.ui_text("offset"),
-        ui_type = jbox.ui_linear ({min=-1, max=1, units={{decimals=2}}})
-      },
       angle = jbox.number {
         property_tag = 3,
         min=0,
         default = 0,
-        steps=1800,
+        steps=1801,
         ui_name = jbox.ui_text("angle"),
-        ui_type = jbox.ui_linear ({min=0, max=179.9, units={{template = jbox.ui_text("degrees" )}}})
+        ui_type = jbox.ui_linear ({min=0, max=180, units={{decimals=1,template = jbox.ui_text("degrees" )}}})
       },
       limiterOnOff = jbox.number {
         property_tag=4,
@@ -46,7 +40,9 @@ custom_properties = jbox.property_set{
       },
       limiter = jbox.number {
         property_tag=6,
-        default=1,
+        min=0,
+        steps=101,
+        default=100,
         ui_name = jbox.ui_text("limiter"),  
         
         ui_type = jbox.ui_linear{
@@ -55,12 +51,39 @@ custom_properties = jbox.property_set{
           units = {{ decimals=1, unit = { template = jbox.ui_text("decibels" )}}}
         }
      },
-      gain = jbox.number {
+      inGain = jbox.number {
         property_tag = 7,
-        default = 1,
-        ui_name = jbox.ui_text("gain"),
+        min=0,
+        steps=101,
+        default = 100,
+        ui_name = jbox.ui_text("inGain"),
         ui_type = jbox.ui_linear ({min=0, max=1, units={{decimals=2}}})
-      }
+      },
+      outGain = jbox.number {
+        property_tag = 8,
+        min=0,
+        steps=101,
+        default = 100,
+        ui_name = jbox.ui_text("outGain"),
+        ui_type = jbox.ui_linear ({min=0, max=1, units={{decimals=2}}})
+      },
+      inData = jbox.number {
+        property_tag = 9,
+        min=0,
+        default=0,
+        steps=2,
+        ui_name = jbox.ui_text("IN"),
+        ui_type = jbox.ui_selector ({jbox.UI_TEXT_OFF,jbox.UI_TEXT_ON})
+      },
+      outData = jbox.number {
+        property_tag = 10,
+        min=0,
+        default=0,
+        steps=2,
+        ui_name = jbox.ui_text("OUT"),
+        ui_type = jbox.ui_selector ({jbox.UI_TEXT_OFF,jbox.UI_TEXT_ON})
+      },
+      
 		}
 	},
 	rtc_owner = {
@@ -86,11 +109,11 @@ audio_outputs = {
 local properties = {
   [1] = "phase",
   [2] = "offset",
-  [3] = "angle",
   [4] = "limiterOnOff",
   [5] = "limiterHardSoft",
   [6] = "limiter",
-  [7] = "gain"
+  [7] = "inGain",
+  [8] = "outGain"
 }
 
 

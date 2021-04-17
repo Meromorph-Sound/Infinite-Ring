@@ -11,6 +11,10 @@
 namespace meromorph {
 namespace ring {
 
+float32 phaseArgument(const TJBox_PropertyDiff &diff,float32 minFreq,float32 maxFreq,uint32 N) {
+	auto def = intRangeToFloat(diff.fCurrentValue,N,minFreq,maxFreq);
+	return cx::deg2rad(def);
+}
 
 
 InfiniteRing::InfiniteRing() : RackExtension(), left("/audio_inputs/Left","/audio_outputs/Left"),
@@ -35,32 +39,37 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 		break;
 	case Tags::PHASE: {
 		trace("phase fired");
-		auto p = cx::purePhase(toFloat(diff.fCurrentValue));
+		auto p = phaseArgument(diff,-45,45,9001);
+		trace("Setting phase to ^0 degrees",p);
 		left.setPhase(p);
 		right.setPhase(p);
 		break;
 	}
-	case Tags::OFFSET: {
-		auto o = toFloat(diff.fCurrentValue);
-		left.setOffset(o);
-		right.setOffset(o);
-		break;
-	}
 	case Tags::ANGLE: {
-		auto a = cx::purePhase(-toFloat(diff.fCurrentValue));
-		left.setAngle(a);
-		right.setAngle(a);
+		auto p = phaseArgument(diff,0,180,1801);
+		trace("Setting angle to ^0 degrees",p);
+		left.setAngle(p);
+		right.setAngle(p);
 		break;
 	}
 
-	case Tags::GAIN: {
-		amplitude = clampedFloat(diff.fCurrentValue);
-		trace("Amplitude is ^0",amplitude);
+	case Tags::INPUT_GAIN: {
+		auto a = intRangeToFloat(diff.fCurrentValue,101,0.f,1.f);
+		trace("Amplitude is ^0",a);
+		left.setInputGain(a);
+		right.setInputGain(a);
+		break;
+	}
+	case Tags::OUTPUT_GAIN: {
+		auto a = clampedFloat(diff.fCurrentValue);
+		left.setOutputGain(a);
+		right.setOutputGain(a);
 		break;
 	}
 
 	case Tags::LIMITER: {
-		auto l = scaledFloat(diff.fCurrentValue,-12.f,0.f);
+		auto l = intRangeToFloat(diff.fCurrentValue,101,-12.f,0.f);
+		trace("Limit is ^0",l);
 		left.setLimit(l);
 		right.setLimit(l);
 		break;
@@ -77,6 +86,9 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 		right.setLimiterMode(l);
 		break;
 	}
+
+
+
 	case kJBox_AudioInputConnected:
 		trace("Audio input");
 		trace(diff.fPropertyRef.fKey);

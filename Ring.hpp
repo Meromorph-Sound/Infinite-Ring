@@ -27,7 +27,8 @@ enum Tags : uint32 {
 	LIMITER_ONOFF = 4,
 	LIMITER_HARD_SOFT = 5,
 	LIMITER = 6,
-	GAIN = 7
+	INPUT_GAIN = 7,
+	OUTPUT_GAIN = 8
 	};
 
 
@@ -47,12 +48,6 @@ private:
 
 
 
-
-
-
-
-
-	float32 amplitude = 1.0;
 
 protected:
 
