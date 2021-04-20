@@ -16,6 +16,12 @@
 namespace meromorph {
 namespace ring {
 
+enum ProcessingMode {
+	REAL,
+	SEMI_COMPLEX,
+	COMPLEX
+};
+
 class ChannelProcessor {
 	protected:
 		static const uint32 IN_BUFFER = kJBox_AudioInputBuffer;
@@ -44,7 +50,7 @@ class ChannelProcessor {
 		cx32 angle = cx::One;
 		Limiter limiter;
 		float32 inputGain = 1.f;
-		float32 outputGain = 1.0f;
+		float32 outputGain = 1.f;
 
 
 		std::vector<float32> buffer;
@@ -53,7 +59,14 @@ class ChannelProcessor {
 		dsp::Hilbert hilbert;
 
 		cx32 runningPhase = cx::One;
-		cx32 runningAngle = cx::One;
+
+		ProcessingMode mode = REAL;
+
+
+		void processReal();
+		void processSemiComplex();
+		void processComplex();
+
 
 
 	public:
@@ -64,14 +77,14 @@ class ChannelProcessor {
 
 		void reset();
 
-		void process();
-		void bypass();
-		void off() {};
+		bool process();
+		bool bypass();
+		bool off() { return false; };
 
 		void setInputGain(const float32 a) { inputGain=a; }
 		void setOutputGain(const float32 a) { outputGain=a; }
 		void setPhase(const float32 p) { phase=std::polar(1.f,p); }
-		void setAngle(const float32 a) { angle=std::polar(1.f,a*0.1f); }
+		void seProcessingMode(const ProcessingMode m) { mode=m; }
 		void setLimiterOnOff(const bool b) { limiter.setActive(b); }
 		void setLimiterMode(const Limiter::Mode m) { limiter.setMode(m); }
 		void setLimit(const float32 l) { limiter.setActive(l); }

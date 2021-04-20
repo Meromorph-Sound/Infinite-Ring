@@ -8,7 +8,7 @@ texts = {
   
   ["phase"] = "Phase Angle",
   ["wetdry"] = "Wey / Dry mixture",
-  ["angle"] = "Extraction angle",
+  ["mode"] = "Processing Mode",
   ["limiterOnOff"] = "Limiter On/Off",
   ["limiterHardSoft"] = "Limiter Hard/Soft",
   ["limiter"] = "Limiter cutoff",
@@ -16,10 +16,13 @@ texts = {
   ["outGain"] = "Output Gain",
   ["IN"] = "IN",
   ["OUT"] = "OUT",
+  ["REAL"] = "Real processing",
+  ["SEMI-COMPLEX"] = "Semi-complex processing",
+  ["COMPLEX"] = "Complex processing",
   
   ["short_phase"] = "phase",
   ["short_wetdry"] = "wetdry",
-  ["short_angle"] = "angle",
+  ["short_mode"] = "mode",
   ["short_limiterOnOff"] = "lOnOff",
   ["short_limiterHardSoft"] = "lHSoft",
   ["short_limiter"] = "limit",
@@ -28,7 +31,7 @@ texts = {
   
   ["shortest_phase"] = "PHSE",
   ["shortest_wetdry"] = "WET",
-  ["shortest_angle"] = "ANGL",
+  ["shortest_mode"] = "MODE",
   ["shortest_limiterOnOff"] = "LMON",
   ["shortest_limiterHardSoft"] = "HDSF",
   ["shortest_limiter"] = "LIMT",

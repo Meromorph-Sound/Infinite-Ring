@@ -326,7 +326,7 @@
          sodipodi:role="line">Data out</tspan></text>
   </g>
   <g
-     style="display:inline;opacity:1"
+     style="display:none;opacity:1"
      inkscape:label="Controls"
      id="layer3"
      inkscape:groupmode="layer">

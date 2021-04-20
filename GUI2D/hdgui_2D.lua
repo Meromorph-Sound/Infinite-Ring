@@ -12,9 +12,20 @@ front = jbox.panel {
       graphics = { node = "phase" },
       value = "/custom_properties/phase"
     },
-     jbox.analog_knob { 
-      graphics = { node = "angle" },
-      value = "/custom_properties/angle"
+     jbox.radio_button { 
+      graphics = { node = "modeR" },
+      value = "/custom_properties/mode",
+      index = 0
+     },
+     jbox.radio_button { 
+      graphics = { node = "modeRC" },
+      value = "/custom_properties/mode",
+      index = 1
+     },
+     jbox.radio_button { 
+      graphics = { node = "modeC" },
+      value = "/custom_properties/mode",
+      index = 2
      },
      jbox.toggle_button { 
       graphics = { node = "limiterOnOff" },

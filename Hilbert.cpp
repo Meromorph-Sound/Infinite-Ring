@@ -46,7 +46,7 @@ void Hilbert::apply(const std::vector<cx32> &in,std::vector<cx32> &out) {
 	FFT::ifft(tmp);
 
 	std::copy(tmp.begin()+N,tmp.end(),tmp.begin());
-	for(auto i=0;i<N;i++) out[i]= in[i] + cx::I * tmp[N-1-i];
+	for(auto i=0;i<N;i++) out[i]= in[i] + cx::I * tmp[i];
 }
 
 

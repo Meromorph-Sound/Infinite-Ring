@@ -11,18 +11,18 @@ custom_properties = jbox.property_set{
 		  phase = jbox.number {
 		    property_tag = 1,
         min = 0,
-		    default = 1,
+		    default = 0,
         steps = 9001,
 		    ui_name = jbox.ui_text("phase"),
-		    ui_type = jbox.ui_linear ({min=-45, max=45, units={{decimals=2,template = jbox.ui_text("degrees" )}}})
+		    ui_type = jbox.ui_linear ({min=0, max=90, units={{decimals=2,template = jbox.ui_text("degrees" )}}})
 		  },
-      angle = jbox.number {
+      mode = jbox.number {
         property_tag = 3,
         min=0,
-        default = 0,
-        steps=1801,
-        ui_name = jbox.ui_text("angle"),
-        ui_type = jbox.ui_linear ({min=0, max=180, units={{decimals=1,template = jbox.ui_text("degrees" )}}})
+        default = 1,
+        steps=3,
+        ui_name = jbox.ui_text("mode"),
+        ui_type = jbox.ui_selector ({jbox.ui_text("REAL"),jbox.ui_text("SEMI-COMPLEX"),jbox.ui_text("COMPLEX"))
       },
       limiterOnOff = jbox.number {
         property_tag=4,
@@ -108,7 +108,7 @@ audio_outputs = {
 
 local properties = {
   [1] = "phase",
-  [2] = "offset",
+  [3] = "mode",
   [4] = "limiterOnOff",
   [5] = "limiterHardSoft",
   [6] = "limiter",

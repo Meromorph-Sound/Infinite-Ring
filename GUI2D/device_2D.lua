@@ -18,9 +18,17 @@ front = {
     offset = { 1000, 100 },
     { path = "Knob_01_63frames", frames = 63 }
   },
-  angle = {
-    offset = { 1400, 100 },
-    { path = "Knob_01_63frames", frames = 63 }
+  modeR = {
+    offset = { 1400, 50 },
+    { path = "Button_53_2frames", frames = 2 }
+  },
+  modeRC = {
+    offset = { 1400, 150 },
+    { path = "Button_53_2frames", frames = 2 }
+  },
+  modeC = {
+    offset = { 1400, 250 },
+    { path = "Button_53_2frames", frames = 2 }
   },
   limiterOnOff = {
     offset = { 2050, 100 },

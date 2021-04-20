@@ -39,8 +39,9 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 		break;
 	case Tags::PHASE: {
 		trace("phase fired");
-		auto p = phaseArgument(diff,-45,45,9001);
-		trace("Setting phase to ^0 degrees",p);
+		auto raw = toFloat(diff.fCurrentValue);
+		auto p = phaseArgument(diff,0,90,9001)*0.1f;
+		trace("Setting phase to ^0 degrees (raw is ^1)",p*180.f/Pi,raw);
 		left.setPhase(p);
 		right.setPhase(p);
 		break;

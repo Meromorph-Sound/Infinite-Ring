@@ -29,7 +29,7 @@ rt_input_setup = {
   "/custom_properties/builtin_onoffbypass",
   "/custom_properties/phase",
  
-  "/custom_properties/angle",
+  "/custom_properties/mode",
   "/custom_properties/limiterOnOff",
   "/custom_properties/limiterHardSoft",
   "/custom_properties/limiter",

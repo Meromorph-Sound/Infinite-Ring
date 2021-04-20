@@ -8,7 +8,8 @@
 		<Object name="custom_properties">
 			<Value property="phase" type="number">0</Value>
 			<Value property="angle" type="number">0</Value>
-			<Value property="gain" type="number">1</Value>
+			<Value property="inGain" type="number">1</Value>
+			<Value property="outGain" type="number">1</Value>
 			<Value property="limiter" type="number">1</Value>
 			<Value property="limiterOnOff" type="number">1</Value>
 			<Value property="limiterHardSoft" type="number">0</Value>

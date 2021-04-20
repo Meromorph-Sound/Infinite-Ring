@@ -44,7 +44,7 @@ void trace(const char *tmpl,const float32 value1,const float32 value2) {
  float32 intRangeToFloat(const TJBox_Value diff,const uint32 steps,const float32 min,const float32 max) {
 	 auto m=(float32)(steps-1);
 	 auto f = std::max(0.f,std::min(toFloat(diff),m))/m;
-	 return min+max*f;
+	 return min+(max-min)*f;
  }
 
 
