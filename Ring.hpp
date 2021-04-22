@@ -23,12 +23,14 @@ namespace ring {
 enum Tags : uint32 {
 	PHASE=1,
 	OFFSET=2,
-	ANGLE=3,
+	MODE=3,
 	LIMITER_ONOFF = 4,
 	LIMITER_HARD_SOFT = 5,
 	LIMITER = 6,
 	INPUT_GAIN = 7,
-	OUTPUT_GAIN = 8
+	OUTPUT_GAIN = 8,
+	LEFT_INDICATOR = 9,
+	RIGHT_INDICATOR = 10
 	};
 
 
@@ -46,6 +48,8 @@ private:
 	std::vector<float32> lBuffer;
 	std::vector<float32> rBuffer;
 
+	bool lActive = false;
+	bool rActive = false;
 
 
 
@@ -54,6 +58,7 @@ protected:
 	virtual void processApplicationMessage(const TJBox_PropertyDiff &diff);
 	virtual void process();
 	virtual void reset();
+
 public:
 	InfiniteRing();
 	virtual ~InfiniteRing() = default;

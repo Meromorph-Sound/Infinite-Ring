@@ -26,8 +26,11 @@ protected:
 		std::vector<float32> buffer;
 
 
-
-		void set(const float32 value,const Tag tag);
+		template <typename T, class = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+		void set(const T value,const Tag tag) {
+			TJBox_Value v = JBox_MakeNumber(static_cast<float64>(value));
+			JBox_StoreMOMPropertyByTag(props,tag,v);
+		}
 		virtual void setSampleRate(const float32) {};
 			virtual void setMasterTune(const float32) {};
 			virtual void reset() {};

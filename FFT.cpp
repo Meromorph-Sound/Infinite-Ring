@@ -59,7 +59,7 @@ void FFT::ifft(std::vector<cx32> &buffer)
 {
 	std::transform(buffer.begin(),buffer.end(),buffer.begin(),[](cx32 z) { return std::conj(z);});
 	fft(buffer);
-	auto s = cx32(buffer.size());
+	auto s = sqrt(cx32(buffer.size()));
 	std::transform(buffer.begin(),buffer.end(),buffer.begin(),[s](cx32 z) { return std::conj(z)/s;});
 }
 

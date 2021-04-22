@@ -84,7 +84,7 @@ class ChannelProcessor {
 		void setInputGain(const float32 a) { inputGain=a; }
 		void setOutputGain(const float32 a) { outputGain=a; }
 		void setPhase(const float32 p) { phase=std::polar(1.f,p); }
-		void seProcessingMode(const ProcessingMode m) { mode=m; }
+		void setProcessingMode(const ProcessingMode m) { mode=m; }
 		void setLimiterOnOff(const bool b) { limiter.setActive(b); }
 		void setLimiterMode(const Limiter::Mode m) { limiter.setMode(m); }
 		void setLimit(const float32 l) { limiter.setActive(l); }

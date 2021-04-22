@@ -21,6 +21,7 @@ private:
 	uint32 N;
 
 	uint32 nStages;
+	cx32 sqr2;
 public:
 	std::vector<cx32> hilbert;
 	std::vector<cx32> buffer;

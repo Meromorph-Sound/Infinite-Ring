@@ -15,10 +15,7 @@ RackExtension::RackExtension() : buffer(RackExtension::BUFFER_SIZE) {
 }
 
 
-void RackExtension::set(const float32 value,const Tag tag) {
-	TJBox_Value v = JBox_MakeNumber(static_cast<float64>(value));
-	JBox_StoreMOMPropertyByTag(props,tag,v);
-}
+
 
 
 void RackExtension::processMIDIEvent(const TJBox_PropertyDiff &diff) {

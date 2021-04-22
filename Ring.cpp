@@ -29,6 +29,8 @@ void InfiniteRing::reset() {
 }
 
 
+
+
 void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 	Tag tag = diff.fPropertyTag;
 
@@ -46,11 +48,11 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 		right.setPhase(p);
 		break;
 	}
-	case Tags::ANGLE: {
-		auto p = phaseArgument(diff,0,180,1801);
-		trace("Setting angle to ^0 degrees",p);
-		left.setAngle(p);
-		right.setAngle(p);
+	case Tags::MODE: {
+		auto m = static_cast<ProcessingMode>(toInt(diff.fCurrentValue));
+		trace("Mode is %d",m);
+		left.setProcessingMode(m);
+		right.setProcessingMode(m);
 		break;
 	}
 
@@ -100,18 +102,24 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 
 
 void InfiniteRing::process() {
+	bool lA=false;
+	bool rA=false;
 	switch(state) {
 	case State::On:
-		left.process();
-		right.process();
+		lA=left.process();
+		rA=right.process();
 		break;
 	case State::Bypassed:
-		left.bypass();
-		right.bypass();
+		lA=left.bypass();
+		rA=right.bypass();
 		break;
 	default:
 		break;
 	}
+	if(lA!=lActive) set(lA,Tags::LEFT_INDICATOR);
+	if(rA!=rActive) set(rA,Tags::RIGHT_INDICATOR);
+	lActive=lA;
+	rActive=rA;
 }
 
 
