@@ -56,11 +56,21 @@ void ChannelProcessor::reset() {
 	runningPhase=cx::One;
 }
 
+cx32 ChannelProcessor::limit(const cx32 z) {
+	return HARD_LIMIT*tanh(z/HARD_LIMIT);
+}
+float32 ChannelProcessor::limit(const float32 z) {
+	return HARD_LIMIT*tanh(z/HARD_LIMIT);
+}
+
 void ChannelProcessor::processReal() {
 	for(auto i=0;i<BUFFER_SIZE;i++) {
 		runningPhase *= phase;
-		auto r = buffer[i]*inputGain*std::imag(runningPhase);
-		auto frac = 1.f / (1.f - r);
+		buffer[i]=buffer[i]*inputGain*std::imag(runningPhase);
+	}
+	didLimit=limiter.limit(buffer);
+	for(auto i=0;i<BUFFER_SIZE;i++) {
+		auto frac = 1.f / (1.f - buffer[i]);
 		buffer[i] = (frac-1.f)*outputGain;
 	}
 }
@@ -68,19 +78,26 @@ void ChannelProcessor::processReal() {
 void ChannelProcessor::processSemiComplex() {
 	for(auto i=0;i<BUFFER_SIZE;i++) {
 		runningPhase *= phase;
-		cx32 r = buffer[i]*inputGain*runningPhase;
-		auto frac = 1.f / (1.f - r);
+		cxbuffer[i]=buffer[i]*inputGain*runningPhase;
+	}
+	didLimit=limiter.limit(cxbuffer);
+	for(auto i=0;i<BUFFER_SIZE;i++) {
+		auto frac = 1.f / (1.f - cxbuffer[i]);
 		buffer[i] = std::real((frac-1.f)*outputGain);
 	}
 }
 
 void ChannelProcessor::processComplex() {
-	for(auto i=0;i<BUFFER_SIZE;i++) cxbuffer[i]=cx32(buffer[i]*inputGain);
+	auto iG=inputGain/2.f;
+	for(auto i=0;i<BUFFER_SIZE;i++) cxbuffer[i]=cx32(buffer[i]);
 	hilbert.apply(cxbuffer,cxout);
 	for(auto i=0;i<BUFFER_SIZE;i++) {
 		runningPhase *= phase;
-		cx32 z = cxout[i]*runningPhase;
-		auto frac = cx::One / (cx::One - z);
+		cxout[i]=cxout[i]*runningPhase*iG;
+	}
+	didLimit=limiter.limit(cxout);
+	for(auto i=0;i<BUFFER_SIZE;i++) {
+		auto frac = cx::One / (cx::One - cxout[i]);
 		buffer[i]=std::real(frac - cx::One)*outputGain;
 	}
 }
@@ -105,9 +122,9 @@ bool ChannelProcessor::process() {
 		}
 
 
-		limiter.limit(buffer);
+
 		write();
-		return true;
+		return didLimit ;
 	}
 	return false;
 }

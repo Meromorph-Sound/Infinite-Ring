@@ -23,11 +23,12 @@ private:
 	float32 scale;
 	Mode mode;
 	bool active;
+	bool didLimit;
 
 	static constexpr float32 epsilon=1.0e-5;
 public:
 
-	Limiter() : scale(1.0), mode(Mode::HARD), active(true) {};
+	Limiter() : scale(1.0), mode(Mode::HARD), active(true), didLimit(false) {};
 	virtual ~Limiter() = default;
 	Limiter(const Limiter &other) = default;
 	Limiter& operator=(const Limiter &other) = default;
@@ -36,8 +37,28 @@ public:
 	void setMode(const Mode m) { mode=m; }
 	void setActive(const bool a) { active=a; }
 
-	void limit(float32 *data,const uint32 n);
-	void limit(std::vector<float32> &v) { limit(v.data(),v.size()); }
+	template<typename T>
+	bool limit(T *data,const uint32 n) {
+		didLimit=false;
+		if(!active) return false;
+
+		switch(mode) {
+		case Mode::SOFT:
+			for(auto i=0;i<n;i++) data[i]=scale*tanh(data[i]/scale);
+			didLimit=true;
+			break;
+		case Mode::HARD:
+			for(auto i=0;i<n;i++) {
+				auto n = std::max(scale,std::abs(data[i]));
+				data[i]=data[i]/n;
+				didLimit = didLimit || (n>1);
+			}
+			break;
+		}
+		return didLimit;
+	}
+	template<typename T>
+	bool limit(std::vector<T> &v) { return limit(v.data(),v.size()); }
 };
 
 } /* namespace meromorph */

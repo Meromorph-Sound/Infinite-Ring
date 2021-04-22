@@ -22,7 +22,7 @@ custom_properties = jbox.property_set{
         default = 1,
         steps=3,
         ui_name = jbox.ui_text("mode"),
-        ui_type = jbox.ui_selector ({jbox.ui_text("REAL"),jbox.ui_text("SEMI-COMPLEX"),jbox.ui_text("COMPLEX"))
+        ui_type = jbox.ui_selector ({jbox.ui_text("REAL"),jbox.ui_text("SEMI-COMPLEX"),jbox.ui_text("COMPLEX")})
       },
       limiterOnOff = jbox.number {
         property_tag=4,
@@ -38,14 +38,11 @@ custom_properties = jbox.property_set{
         ui_name = jbox.ui_text("limiterHardSoft"),
         ui_type = jbox.ui_selector ({jbox.UI_TEXT_OFF,jbox.UI_TEXT_ON})
       },
-      limiter = jbox.number {
-        property_tag=6,
-        min=0,
-        steps=101,
-        default=100,
-        ui_name = jbox.ui_text("limiter"),  
-        
-        ui_type = jbox.ui_linear{
+     ["limiter"] = jbox.number {
+      default=1,
+      ui_name = jbox.ui_text("limiter"),  
+      property_tag=6,
+      ui_type = jbox.ui_linear{
           min=LIMITER_MIN,
           max=LIMITER_MAX,
           units = {{ decimals=1, unit = { template = jbox.ui_text("decibels" )}}}
@@ -67,7 +64,16 @@ custom_properties = jbox.property_set{
         ui_name = jbox.ui_text("outGain"),
         ui_type = jbox.ui_linear ({min=0, max=1, units={{decimals=2}}})
       },
-      inData = jbox.number {
+      
+      
+		}
+	},
+	rtc_owner = {
+		properties = { instance = jbox.native_object{} }
+	},
+	rt_owner = {
+	 properties = {
+     inData = jbox.number {
         property_tag = 9,
         min=0,
         default=0,
@@ -82,15 +88,8 @@ custom_properties = jbox.property_set{
         steps=2,
         ui_name = jbox.ui_text("OUT"),
         ui_type = jbox.ui_selector ({jbox.UI_TEXT_OFF,jbox.UI_TEXT_ON})
-      },
-      
-		}
-	},
-	rtc_owner = {
-		properties = { instance = jbox.native_object{} }
-	},
-	rt_owner = {
-	 properties = {}
+      }
+    }
 	}
 
 }

@@ -10,7 +10,7 @@
 
 #include "RackExtension.hpp"
 #include "ChannelProcessor.hpp"
-
+#include "TriggerState.hpp"
 
 
 namespace meromorph {
@@ -48,16 +48,17 @@ private:
 	std::vector<float32> lBuffer;
 	std::vector<float32> rBuffer;
 
-	bool lActive = false;
-	bool rActive = false;
+	TriggerState lTrigger;
+	TriggerState rTrigger;
 
-
+	void handleTrigger(TriggerState &trigger,const bool triggered);
 
 protected:
 
 	virtual void processApplicationMessage(const TJBox_PropertyDiff &diff);
 	virtual void process();
 	virtual void reset();
+	virtual void setSampleRate(const float32 rate);
 
 public:
 	InfiniteRing();

@@ -1,1 +1,2 @@
 *.png filter=lfs diff=lfs merge=lfs -text
+Tests/piano.recon filter=lfs diff=lfs merge=lfs -text

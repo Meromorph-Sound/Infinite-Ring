@@ -16,10 +16,10 @@
 namespace meromorph {
 namespace ring {
 
-enum ProcessingMode {
-	REAL,
-	SEMI_COMPLEX,
-	COMPLEX
+enum ProcessingMode : uint32 {
+	REAL = 0,
+	SEMI_COMPLEX = 1,
+	COMPLEX = 2
 };
 
 class ChannelProcessor {
@@ -29,6 +29,9 @@ class ChannelProcessor {
 
 		static const uint32 IN_CONN = kJBox_AudioInputConnected;
 		static const uint32 OUT_CONN = kJBox_AudioOutputConnected;
+
+		static const float32 constexpr EPSILON = 1.0e-5;
+		static const float32 constexpr HARD_LIMIT = 1.f - EPSILON;
 
 		TJBox_ObjectRef input;
 		TJBox_ObjectRef output;
@@ -44,7 +47,9 @@ class ChannelProcessor {
 		void write();
 		bool isSilent();
 
-		bool initialised = false;
+		bool didLimit=false;
+		cx32 limit(const cx32 z);
+		float32 limit(const float32 z);
 
 		cx32 phase = cx::One;
 		cx32 angle = cx::One;
@@ -61,6 +66,7 @@ class ChannelProcessor {
 		cx32 runningPhase = cx::One;
 
 		ProcessingMode mode = REAL;
+
 
 
 		void processReal();

@@ -8,6 +8,7 @@
 #include "Ring.hpp"
 
 
+
 namespace meromorph {
 namespace ring {
 
@@ -19,13 +20,38 @@ float32 phaseArgument(const TJBox_PropertyDiff &diff,float32 minFreq,float32 max
 
 InfiniteRing::InfiniteRing() : RackExtension(), left("/audio_inputs/Left","/audio_outputs/Left"),
 		right("/audio_inputs/Right","/audio_outputs/Right"),
-		lBuffer(BUFFER_SIZE), rBuffer(BUFFER_SIZE) {
+		lBuffer(BUFFER_SIZE), rBuffer(BUFFER_SIZE), lTrigger(Tags::LEFT_INDICATOR),
+		rTrigger(Tags::RIGHT_INDICATOR) {
 	trace("Clicker is here");
 }
 
 void InfiniteRing::reset() {
 	left.reset();
 	right.reset();
+}
+
+void InfiniteRing::setSampleRate(const float32 rate) {
+	lTrigger.setDelay(rate,BUFFER_SIZE);
+	rTrigger.setDelay(rate,BUFFER_SIZE);
+	trace("Sample rate is ^0",rate);
+}
+
+
+void InfiniteRing::handleTrigger(TriggerState &trigger,const bool triggered) {
+	if(triggered) trigger.set();
+
+	switch(trigger.step()) {
+	case TriggerState::SET:
+		set(1,trigger.Tag());
+		break;
+	case TriggerState::RESET:
+		set(0,trigger.Tag());
+		break;
+	default:
+		break;
+	}
+
+	trigger.clear();
 }
 
 
@@ -49,8 +75,9 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 		break;
 	}
 	case Tags::MODE: {
-		auto m = static_cast<ProcessingMode>(toInt(diff.fCurrentValue));
-		trace("Mode is %d",m);
+		auto i = toInt(diff.fCurrentValue);
+		auto m = static_cast<ProcessingMode>(i);
+		trace("Mode is ^0 (^1)",i,m);
 		left.setProcessingMode(m);
 		right.setProcessingMode(m);
 		break;
@@ -71,10 +98,12 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 	}
 
 	case Tags::LIMITER: {
-		auto l = intRangeToFloat(diff.fCurrentValue,101,-12.f,0.f);
-		trace("Limit is ^0",l);
-		left.setLimit(l);
-		right.setLimit(l);
+		auto r = toFloat(diff.fCurrentValue);
+		auto l = scaledFloat(diff.fCurrentValue,-12.f,0.f);
+		auto p = pow(10.f,l*0.1f);
+		trace("Limiter scale is ^0 <=> ^1",r,l);
+		left.setLimit(p);
+		right.setLimit(p);
 		break;
 	}
 	case Tags::LIMITER_ONOFF: {
@@ -116,10 +145,10 @@ void InfiniteRing::process() {
 	default:
 		break;
 	}
-	if(lA!=lActive) set(lA,Tags::LEFT_INDICATOR);
-	if(rA!=rActive) set(rA,Tags::RIGHT_INDICATOR);
-	lActive=lA;
-	rActive=rA;
+
+	handleTrigger(lTrigger,lA);
+	handleTrigger(rTrigger,rA);
+
 }
 
 
