@@ -44,3 +44,6 @@ Intermediate-llvm/
 *.plist
 
 Debug/
+
+*.wav
+

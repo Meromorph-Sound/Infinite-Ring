@@ -39,6 +39,7 @@ texts = {
   ["shortest_outGain"] = "OGN",
   
   ["decibels"] = "^0 dB",
-  ["degrees"] = "^0 deg"
+  ["degrees"] = "^0 deg",
+  ["volume"] = "volume",
  
  }

@@ -73,7 +73,7 @@ custom_properties = jbox.property_set{
 	},
 	rt_owner = {
 	 properties = {
-     inData = jbox.number {
+     outClipL = jbox.number {
         property_tag = 9,
         min=0,
         default=0,
@@ -81,13 +81,25 @@ custom_properties = jbox.property_set{
         ui_name = jbox.ui_text("IN"),
         ui_type = jbox.ui_selector ({jbox.UI_TEXT_OFF,jbox.UI_TEXT_ON})
       },
-      outData = jbox.number {
+      outClipR = jbox.number {
         property_tag = 10,
         min=0,
         default=0,
         steps=2,
         ui_name = jbox.ui_text("OUT"),
         ui_type = jbox.ui_selector ({jbox.UI_TEXT_OFF,jbox.UI_TEXT_ON})
+      },
+      outVolL = jbox.number {
+        default=0,
+        ui_name=jbox.ui_text("volume"),
+        property_tag=11,
+        ui_type = linearType()
+      },
+      outVolR = jbox.number {
+        default=0,
+        ui_name=jbox.ui_text("volume"),
+        property_tag=12,
+        ui_type = linearType()
       }
     }
 	}

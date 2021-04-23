@@ -50,13 +50,21 @@ front = {
     offset = { 2800, 100 },
     { path = "Knob_01_63frames", frames = 63 }
   },
-  inData = {
-    offset = {2400, 30 },
-    { path = "Lamp_10_GREEN_2frames", frames = 2}
+  outClipL = {
+    offset = {3410, 100 },
+    { path = "Lamp_10_RED_2frames", frames = 2}
   },
-  outData = {
-    offset = {2800, 30 },
-    { path = "Lamp_10_GREEN_2frames", frames = 2}
+  outClipR = {
+    offset = {3410, 150 },
+    { path = "Lamp_10_RED_2frames", frames = 2}
+  },
+  outVolL = {
+    offset = {3100, 100 },
+    { path = "Display_200_50_1frames", frames = 2}
+  },
+  outVolR = {
+    offset = {3100, 150 },
+    { path = "Display_200_50_1frames", frames = 2}
   },
 }
 back = {

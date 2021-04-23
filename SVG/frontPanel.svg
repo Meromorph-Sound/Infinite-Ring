@@ -113,8 +113,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="1166.3397"
-     inkscape:cy="266.79324"
+     inkscape:cx="1769.1968"
+     inkscape:cy="249.65039"
      inkscape:document-units="mm"
      inkscape:current-layer="layer3"
      inkscape:document-rotation="0"
@@ -298,32 +298,21 @@
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">Output Gain</tspan></text>
     <text
        id="text2933-1-8-9-3-0"
-       y="63.900002"
-       x="2480.3562"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;line-height:1.25;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;opacity:1;image-rendering:auto"
+       y="135.104"
+       x="3059.061"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:'Avenir Next';-inkscape-font-specification:'Avenir Next, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;opacity:1;image-rendering:auto"
        xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
-         y="63.900002"
-         x="2480.3562"
+         style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:42.6667px;font-family:'Avenir Next';-inkscape-font-specification:'Avenir Next, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
+         y="135.104"
+         x="3059.061"
          id="tspan2931-40-7-1-7-4"
-         sodipodi:role="line">Data in</tspan></text>
+         sodipodi:role="line">L</tspan></text>
     <tspan
        sodipodi:role="line"
        id="tspan2931-40-7-1-7-4-4"
        x="2529.2393"
        y="73.820023"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;line-height:1.25;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;opacity:1;fill:#ffffff;image-rendering:auto">Data in</tspan>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;line-height:1.25;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;opacity:1;image-rendering:auto"
-       x="2859.0977"
-       y="63.82"
-       id="text2933-1-8-9-3-0-0"><tspan
-         sodipodi:role="line"
-         id="tspan2931-40-7-1-7-4-8"
-         x="2859.0977"
-         y="63.82"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">Data out</tspan></text>
     <text
        id="text124"
        y="242.85715"
@@ -354,6 +343,45 @@
          y="242.18515"
          x="1575.5081"
          id="tspan122-4-8">ℂ</tspan></text>
+    <rect
+       ry="0"
+       y="100"
+       x="3100"
+       height="40"
+       width="300"
+       id="rect171"
+       style="fill:#000000;stroke:none;stroke-width:13.7355;stroke-linecap:round;stroke-linejoin:round" />
+    <rect
+       style="display:inline;fill:#000000;stroke:none;stroke-width:13.7355;stroke-linecap:round;stroke-linejoin:round"
+       id="rect171-7"
+       width="300"
+       height="40"
+       x="3100"
+       y="150"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:'Avenir Next';-inkscape-font-specification:'Avenir Next, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;opacity:1;image-rendering:auto"
+       x="3057.1841"
+       y="185.104"
+       id="text2933-1-8-9-3-0-8"><tspan
+         sodipodi:role="line"
+         id="tspan2931-40-7-1-7-4-3"
+         x="3057.1841"
+         y="185.104"
+         style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:42.6667px;font-family:'Avenir Next';-inkscape-font-specification:'Avenir Next, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">R</tspan></text>
+    <text
+       transform="rotate(-90)"
+       id="text2933-1-8-9-9-3"
+       y="3442.0959"
+       x="-310.01065"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;line-height:1.25;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;opacity:1;image-rendering:auto"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:condensed;font-size:40px;font-family:'Avenir Next Condensed';-inkscape-font-specification:'Avenir Next Condensed, Medium Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
+         y="3442.0959"
+         x="-310.01065"
+         id="tspan2931-40-7-1-1-8"
+         sodipodi:role="line">Limited</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -455,11 +483,11 @@
        id="rect3340"
        width="40"
        height="40"
-       x="2400"
-       y="30" />
+       x="3410"
+       y="100" />
     <rect
-       y="30"
-       x="2800"
+       y="150"
+       x="3410"
        height="40"
        width="40"
        id="rect3340-4"

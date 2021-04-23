@@ -48,13 +48,27 @@ front = jbox.panel {
       value = "/custom_properties/outGain"
      },
      jbox.sequence_meter {
-       graphics = { node = "inData" },
-       value = "/custom_properties/inData"
+       graphics = { node = "outClipL" },
+       value = "/custom_properties/outClipL"
      },
      jbox.sequence_meter {
-       graphics = { node = "outData" },
-       value = "/custom_properties/outData"
-     }
+       graphics = { node = "outClipR" },
+       value = "/custom_properties/outClipR"
+     },
+     jbox.custom_display {
+      graphics={node="outVolL"},
+      display_width_pixels=300,
+      display_height_pixels=40,
+      values = { "/custom_properties/outVolL" },
+      draw_function = "drawVolume"
+    },
+    jbox.custom_display {
+      graphics={node="outVolR"},
+      display_width_pixels=300,
+      display_height_pixels=40,
+      values = { "/custom_properties/outVolR" },
+      draw_function = "drawVolume"
+    },
      
   }
 }
