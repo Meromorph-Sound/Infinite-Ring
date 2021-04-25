@@ -28,7 +28,6 @@ rt_input_setup = {
   notify = {
   "/custom_properties/builtin_onoffbypass",
   "/custom_properties/phase",
- 
   "/custom_properties/mode",
   "/custom_properties/limiterOnOff",
   "/custom_properties/limiterHardSoft",
@@ -37,6 +36,8 @@ rt_input_setup = {
    "/custom_properties/outGain",
   "/audio_inputs/Left/connected",
   "/audio_inputs/Right/connected",
+  "/audio_outputs/Left/connected",
+  "/audio_outputs/Right/connected",
   "/transport/request_reset_audio",
   "/environment/master_tune",
   "/environment/system_sample_rate"

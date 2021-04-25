@@ -11,6 +11,7 @@
 #include "base.hpp"
 #include "Limiter.hpp"
 #include "Hilbert.hpp"
+#include "TriggerState.hpp"
 
 
 namespace meromorph {
@@ -26,19 +27,32 @@ class ChannelProcessor {
 	protected:
 		static const uint32 IN_BUFFER = kJBox_AudioInputBuffer;
 		static const uint32 OUT_BUFFER = kJBox_AudioOutputBuffer;
-
 		static const uint32 IN_CONN = kJBox_AudioInputConnected;
 		static const uint32 OUT_CONN = kJBox_AudioOutputConnected;
-
 		static const float32 constexpr EPSILON = 1.0e-5;
 		static const float32 constexpr HARD_LIMIT = 1.f - EPSILON;
 
+	private:
 		TJBox_ObjectRef input;
 		TJBox_ObjectRef output;
+		std::vector<float32> buffer;
+		std::vector<cx32> cxbuffer;
+		std::vector<cx32> cxout;
+
+		Limiter limiter;
+		TriggerState trigger;
+		dsp::Hilbert hilbert;
+
+		cx32 phase = cx::One;
+		float32 inputGain = 1.f;
+		float32 outputGain = 1.f;
+		ProcessingMode mode = REAL;
+		cx32 runningPhase = cx::One;
+		float32 rms = 0;
+		uint32 chunkCount = 0;
 
 		bool inConnected = false;
 		bool outConnected = false;
-
 
 		bool inputConnected() const;
 		bool outputConnected() const;
@@ -47,31 +61,9 @@ class ChannelProcessor {
 		void write();
 		bool isSilent();
 
-		bool didLimit=false;
-		cx32 limit(const cx32 z);
-		float32 limit(const float32 z);
-
-		cx32 phase = cx::One;
-		cx32 angle = cx::One;
-		Limiter limiter;
-		float32 inputGain = 1.f;
-		float32 outputGain = 1.f;
-
-
-		std::vector<float32> buffer;
-		std::vector<cx32> cxbuffer;
-		std::vector<cx32> cxout;
-		dsp::Hilbert hilbert;
-
-		cx32 runningPhase = cx::One;
-
-		ProcessingMode mode = REAL;
-
-
-
-		void processReal();
-		void processSemiComplex();
-		void processComplex();
+		bool processReal();
+		bool processSemiComplex();
+		bool processComplex();
 
 
 
@@ -83,9 +75,9 @@ class ChannelProcessor {
 
 		void reset();
 
-		bool process();
-		bool bypass();
-		bool off() { return false; };
+		TriggerState::Action process();
+		TriggerState::Action bypass();
+		TriggerState::Action off() { return TriggerState::NIL; };
 
 		void setInputGain(const float32 a) { inputGain=a; }
 		void setOutputGain(const float32 a) { outputGain=a; }
@@ -94,6 +86,10 @@ class ChannelProcessor {
 		void setLimiterOnOff(const bool b) { limiter.setActive(b); }
 		void setLimiterMode(const Limiter::Mode m) { limiter.setMode(m); }
 		void setLimit(const float32 l) { limiter.setActive(l); }
+		void setSampleRate(const float32 rate) { trigger.setDelay(rate,BUFFER_SIZE); }
+
+		void testConnections();
+		float32 getRMS() const { return rms; }
 
 
 

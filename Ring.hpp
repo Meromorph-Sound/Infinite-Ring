@@ -30,28 +30,21 @@ enum Tags : uint32 {
 	INPUT_GAIN = 7,
 	OUTPUT_GAIN = 8,
 	LEFT_INDICATOR = 9,
-	RIGHT_INDICATOR = 10
+	RIGHT_INDICATOR = 10,
+	LEFT_VOL = 11,
+	RIGHT_VOL = 12
 	};
-
-
-
-
-
-
 
 class InfiniteRing : public RackExtension {
 private:
 	ChannelProcessor left;
 	ChannelProcessor right;
 	State state = State::On;
+	bool stateChanged=true;
+	float32 oldLRMS = NAN;
+	float32 oldRRMS = NAN;
 
-	std::vector<float32> lBuffer;
-	std::vector<float32> rBuffer;
-
-	TriggerState lTrigger;
-	TriggerState rTrigger;
-
-	void handleTrigger(TriggerState &trigger,const bool triggered);
+	void handleTrigger(const Tags tag,const TriggerState::Action state);
 
 protected:
 

@@ -20,11 +20,13 @@ public:
 	};
 
 private:
+
 	float32 scale;
 	Mode mode;
 	bool active;
 	bool didLimit;
 
+	static constexpr float32 SOFT_THRESHOLD=0.15;
 	static constexpr float32 epsilon=1.0e-5;
 public:
 
@@ -44,8 +46,12 @@ public:
 
 		switch(mode) {
 		case Mode::SOFT:
-			for(auto i=0;i<n;i++) data[i]=scale*tanh(data[i]/scale);
-			didLimit=true;
+			for(auto i=0;i<n;i++) {
+				auto in = data[i];
+				auto d=scale*tanh(in/scale);
+				data[i]=d;
+				didLimit = didLimit || (abs(d-in)>SOFT_THRESHOLD);
+			}
 			break;
 		case Mode::HARD:
 			for(auto i=0;i<n;i++) {

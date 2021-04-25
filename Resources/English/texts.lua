@@ -16,6 +16,8 @@ texts = {
   ["outGain"] = "Output Gain",
   ["IN"] = "IN",
   ["OUT"] = "OUT",
+  ["zero"] = "0",
+  ["one"] = "1",
   ["REAL"] = "Real processing",
   ["SEMI-COMPLEX"] = "Semi-complex processing",
   ["COMPLEX"] = "Complex processing",
@@ -41,5 +43,6 @@ texts = {
   ["decibels"] = "^0 dB",
   ["degrees"] = "^0 deg",
   ["volume"] = "volume",
+  ["linear_template"] = "^0"
  
  }

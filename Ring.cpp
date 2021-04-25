@@ -12,17 +12,23 @@
 namespace meromorph {
 namespace ring {
 
-float32 phaseArgument(const TJBox_PropertyDiff &diff,float32 minFreq,float32 maxFreq,uint32 N) {
-	auto def = intRangeToFloat(diff.fCurrentValue,N,minFreq,maxFreq);
-	return cx::deg2rad(def);
-}
-
 
 InfiniteRing::InfiniteRing() : RackExtension(), left("/audio_inputs/Left","/audio_outputs/Left"),
-		right("/audio_inputs/Right","/audio_outputs/Right"),
-		lBuffer(BUFFER_SIZE), rBuffer(BUFFER_SIZE), lTrigger(Tags::LEFT_INDICATOR),
-		rTrigger(Tags::RIGHT_INDICATOR) {
-	trace("Clicker is here");
+		right("/audio_inputs/Right","/audio_outputs/Right") {
+	trace("Ring is here");
+}
+
+void InfiniteRing::handleTrigger(const Tags tag,const TriggerState::Action state) {
+	switch(state) {
+	case TriggerState::SET:
+		set(1,tag);
+		break;
+	case TriggerState::RESET:
+		set(0,tag);
+		break;
+	default:
+		break;
+	}
 }
 
 void InfiniteRing::reset() {
@@ -31,40 +37,21 @@ void InfiniteRing::reset() {
 }
 
 void InfiniteRing::setSampleRate(const float32 rate) {
-	lTrigger.setDelay(rate,BUFFER_SIZE);
-	rTrigger.setDelay(rate,BUFFER_SIZE);
+	left.setSampleRate(rate);
+	right.setSampleRate(rate);
 	trace("Sample rate is ^0",rate);
 }
-
-
-void InfiniteRing::handleTrigger(TriggerState &trigger,const bool triggered) {
-	if(triggered) trigger.set();
-
-	switch(trigger.step()) {
-	case TriggerState::SET:
-		set(1,trigger.Tag());
-		break;
-	case TriggerState::RESET:
-		set(0,trigger.Tag());
-		break;
-	default:
-		break;
-	}
-
-	trigger.clear();
-}
-
-
-
 
 void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 	Tag tag = diff.fPropertyTag;
 
 	switch(tag) {
-	case kJBox_CustomPropertiesOnOffBypass:
+	case kJBox_CustomPropertiesOnOffBypass: {
 		trace("On/off/bypass status change");
-		state = static_cast<State>(toFloat(diff.fCurrentValue));
-		break;
+		auto s = static_cast<State>(toFloat(diff.fCurrentValue));
+		stateChanged = s!=state;
+		state=s;
+		break; }
 	case Tags::PHASE: {
 		trace("phase fired");
 		auto raw = toFloat(diff.fCurrentValue);
@@ -118,21 +105,28 @@ void InfiniteRing::processApplicationMessage(const TJBox_PropertyDiff &diff) {
 		right.setLimiterMode(l);
 		break;
 	}
-
-
-
 	case kJBox_AudioInputConnected:
-		trace("Audio input");
-		trace(diff.fPropertyRef.fKey);
+	case kJBox_AudioOutputConnected:
+		left.testConnections();
+		right.testConnections();
 		break;
 	}
+
 
 }
 
 
 void InfiniteRing::process() {
-	bool lA=false;
-	bool rA=false;
+
+	auto lA=TriggerState::NIL;
+	auto rA=TriggerState::NIL;
+
+	if(stateChanged) {
+		lA=TriggerState::RESET;
+		rA=TriggerState::RESET;
+		stateChanged=false;
+	}
+
 	switch(state) {
 	case State::On:
 		lA=left.process();
@@ -146,8 +140,17 @@ void InfiniteRing::process() {
 		break;
 	}
 
-	handleTrigger(lTrigger,lA);
-	handleTrigger(rTrigger,rA);
+	auto lr=left.getRMS();
+	if(lr!=oldLRMS) set(lr,Tags::LEFT_VOL);
+	oldLRMS=lr;
+
+	auto rr=right.getRMS();
+	if(rr!=oldRRMS) set(rr,Tags::RIGHT_VOL);
+	oldRRMS=rr;
+
+
+	handleTrigger(Tags::LEFT_INDICATOR,lA);
+	handleTrigger(Tags::RIGHT_INDICATOR,rA);
 
 }
 

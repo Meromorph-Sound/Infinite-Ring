@@ -5,6 +5,21 @@ local MAX_PHASE = math.pi
 local LIMITER_MIN = -12
 local LIMITER_MAX = 0
 
+function linearType()
+  return jbox.ui_linear {
+    min=0,
+    max=1,
+    units = {
+      min_text = jbox.ui_text("zero"),
+      max_text = jbox.ui_text("one"),
+      { 
+        decimals=2,
+        unit = { template = jbox.ui_text("linear_template") }
+      }
+    }
+  }
+end
+
 custom_properties = jbox.property_set{
 	document_owner = {
 		properties = {

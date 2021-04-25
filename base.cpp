@@ -47,6 +47,11 @@ void trace(const char *tmpl,const float32 value1,const float32 value2) {
 	 return min+(max-min)*f;
  }
 
+ float32 phaseArgument(const TJBox_PropertyDiff &diff,float32 minFreq,float32 maxFreq,uint32 N) {
+ 	auto def = intRangeToFloat(diff.fCurrentValue,N,minFreq,maxFreq);
+ 	return cx::deg2rad(def);
+ }
+
 
  bool toBool(const TJBox_Value diff) {
 	return static_cast<float32>(JBox_GetNumber(diff))>0;
