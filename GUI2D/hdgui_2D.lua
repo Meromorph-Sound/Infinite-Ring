@@ -1,4 +1,8 @@
 format_version = "2.0"
+
+local LightBlue = {26,130,196}
+local White = {255,255,255}
+
 front = jbox.panel { 
   graphics = { node = "Bg" },
   widgets = {

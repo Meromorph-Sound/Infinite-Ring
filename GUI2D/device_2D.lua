@@ -6,14 +6,14 @@ front = {
   Bg = { {path = "front1U"} },
   onoffbypass = {offset = {200,20},{path="Fader_Bypass_3frames", frames = 3 }},
   patches = { offset = { 500,10},{ path = "PatchBrowseGroup", frames = 1}},
-  patch = { offset = {805,20},{ path = "204x10_5x5",frames=1}},
+  patch = { offset = {805,10},{ path = "PatchName_1frames",frames=1}},
   deviceName = {offset = { 1900, 10 },{ path = "Tape_Horizontal_1frames", frames = 1 },},
   phase = {offset = { 1000, 100 },{ path = "Knob_01_63frames", frames = 63 }},
   modeR = {offset = { 1360, 120 },{ path = "Button_53_2frames", frames = 2 }},
   modeRC = {offset = { 1460, 120 },{ path = "Button_53_2frames", frames = 2 }},
   modeC = {offset = { 1560, 120 },{ path = "Button_53_2frames", frames = 2 }},
-  limiterOnOff = {offset = { 2050, 100 },{ path = "Button_53_2frames", frames = 2}},
-  limiterHardSoft = {offset = { 2050, 215 },{ path = "Button_53_2frames", frames = 2}},
+  limiterOnOff = {offset = { 2020, 110 },{ path = "Button_53_2frames", frames = 2}},
+  limiterHardSoft = {offset = { 2020, 205 },{ path = "Button_53_2frames", frames = 2}},
   limiter = {offset = { 1800, 100 },{ path = "Knob_01_63frames", frames = 63 }},
   inGain = {offset = { 2400, 100 },{ path = "Knob_01_63frames", frames = 63 }},
   outGain = {offset = { 2800, 100 },{ path = "Knob_01_63frames", frames = 63 }},
@@ -35,7 +35,7 @@ back = {
 folded_front = {
 	Bg = {{ path = "Panel_Folded_Front" }},
   deviceName = { offset = { 140, 40 },{ path = "Tape_Horizontal_1frames", frames = 1 }},
-  patch = { offset = {805,20},{ path = "204x10_5x5",frames=1}},
+  patch = { offset = {710,35},{ path = "PatchName_1frames",frames=1}},
 }
 folded_back = { 
   Bg = {{ path = "Panel_Folded_Back" }},
