@@ -8,8 +8,8 @@
 #ifndef RING_HPP_
 #define RING_HPP_
 
-#include "RackExtension.hpp"
 #include "ChannelProcessor.hpp"
+#include "RackExtension.hpp"
 #include "TriggerState.hpp"
 
 

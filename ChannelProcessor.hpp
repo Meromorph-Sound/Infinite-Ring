@@ -5,8 +5,8 @@
  *      Author: julianporter
  */
 
-#ifndef CHANNELPROCESSOR_HPP_
-#define CHANNELPROCESSOR_HPP_
+#ifndef CHANNELPROCESSOR_HPP__
+#define CHANNELPROCESSOR_HPP__
 
 #include "base.hpp"
 #include "Limiter.hpp"
@@ -101,4 +101,4 @@ class ChannelProcessor {
 } /* namespace ring */
 } /* namespace meromorph */
 
-#endif /* CHANNELPROCESSOR_HPP_ */
+#endif /* CHANNELPROCESSOR_HPP__ */
